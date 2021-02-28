@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+<html>
+    <head xmlns:th="http://www.thymeleaf.org" th:replace="layouts/layout_base::head">
+        <title>login student</title>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+        <div class="row m-0 justify-content-center aling-items-center vh-100">
+            <div class=" text-center col-sm-3 col-md-3 col-lg-3 col-xl-3 m-5">
+                <h1>Login</h1>
+                <div class="container">
+                    <br>
+                    <div class="row">
+                        <div>
+                            <div role="tabpanel">
+                                <ul class="nav nav-tabs" role="tablist">
+                                    <li role="presentation" class="nav-item ">
+                                        <a class="nav-link" th:href="@{/login}" aria-controls="login" data-toggle="tab" role="tab">Administrador</a></li>
+                                    <li role="presentation" class="nav-item">
+                                        <a class="nav-link active"th:href="@{/loginStudent}" aria-controls="loginStudent" data-toggle="tab" role="tab">Estudiante</a></li>
+                                </ul>
+
+                            </div>
+                            <br>
+                            
+                        </div>
+                    </div>
+                </div>
+
+
+                <form method="POST" th:action="@{/login}">
+                    <label for="username" >DNI:</label>
+                    <br>
+                    <input class="w-70 m-2" type="text" name="username" id="username"/>
+                    <br>
+                    <label for="password" class="ml-2">Legajo:</label>
+                    <br>
+                    <input class="w-70 m-2" type="password" name="password" id="password"/>
+                    <br><br>
+                    <input type="submit" value="Login"/>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>

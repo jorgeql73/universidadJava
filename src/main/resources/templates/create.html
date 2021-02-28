@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+    
+    <head th:replace="layouts/layout_base::head">
+        <title>create</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <ul th:replace="layouts/layout_base :: nav"></ul>
+        <div class="container justify-content-center">
+            <div class="card bg-light">
+                <form th:action="@{create}" th:object="${matter}" method="post">
+                    <div class="form-group row">
+                        <input type="hidden" class="form-control form-control-sm col-md-6" name="id_matter" th:field="*{id_matter}"/>
+                        <div class="col-md-6">
+                            <label class="form-label">Nombre</label>
+                            <input type="text" class="form-control form-control-sm col-md-6" name="name" th:field="*{name}" id='name'/>
+                            <small class="form-text text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></small>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-6">
+                            <label class="form-label">horario</label>
+                            <input type="datetime" class="form-control form-control-sm col-md-6" name="schedule" placeholder="hh:mm:ss" th:field="*{schedule}" id="schedule"/>
+                            
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-6">
+                            <label class="form-label">Descripción</label>
+                            <textarea class="form-control form-control-sm col-md-6" name="description" th:field="*{description}" id="description"></textarea>
+                            <small class="form-text text-danger" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></small>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-6">
+                            <label class="form-label">Cupo</label>
+                            <input type="number" class="form-control form-control-sm col-md-6" name="quota" placeholder="Cupo máximo de estudiantes" th:field="*{quota}" id="quota"/>
+                            <small class="form-text text-danger" th:if="${#fields.hasErrors('quota')}" th:errors="*{quota}"></small>
+                        </div>
+                    </div>
+
+                    <div class="col-6">
+                        <br>
+                        <button type="submit" name="create" class="btn btn-primary">Crear</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>

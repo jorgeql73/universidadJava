@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+
+<html>
+    <head xmlns:th="http://www.thymeleaf.org" th:replace="layouts/layout_base::head"
+          xmlns:sec="http://www.thymeleaf.org/extras/spring-security" >
+        <title>description</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <ul th:replace="layouts/layout_base :: nav"></ul>
+        
+        <br>
+        <br>
+        <div class="card text-center w-50"style="width: auto; margin: auto auto;">
+          
+            <form th:action="@{add}" th:object="${matter}" method="post">
+                
+                <div class="card-header" th:text="${matter.name}"></div>
+                <div class="card-body">
+                    <h6 class="card-title" th:text="${matter.schedule}"></h6>
+                    <p class="card-text" th:text="${matter.description}"></p>
+                    <p class="card-text" th:text="'Cupo: '+${matter.quota}"></p>
+                    <div th:each="inscripcion : ${inscripciones}">        
+                        <p sec:authorize="hasRole('ROLE_STUDENT')" th:if="${matter.id_matter==inscripcion}">Ya estas inscripto</p>
+                    </div>
+                    <button th:unless="${matter.id_matter==inscripcion}" type="submit" name="confirmar" class="btn btn-primary">Confirmar Incripción</button>
+
+                    
+                    
+                    
+                </div>
+            </form>
+            
+        </div>
+    </body>
+</html>

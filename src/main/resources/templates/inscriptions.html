@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+
+<html>
+    <head xmlns:th="http://www.thymeleaf.org" th:replace="layouts/layout_base::head"
+          xmlns:sec="http://www.thymeleaf.org/extras/spring-security" >
+        <title>inscripciones</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div class="container">
+            <ul th:replace="layouts/layout_base :: nav"></ul>
+
+            <br>
+            <a sec:authorize="hasRole('ROLE_ADMIN')"th:href="formCreate" class="btn btn-primary justify-content-end">Crear materia nueva</a>
+            <br>
+            <br>
+            <div class="container justify-content-center" style="padding-left: 60px;">
+                <div class="row justify-content-center">
+                    <div class="card text-center col-sm-12 col-md-4 col-lg-3 col-xl-3"style="width: 310px; margin: 20px; height: 290px" th:each="matter : ${matters}">
+                       
+                        <div class="card-header " th:text="${matter.name}"></div>
+                        <div class="card-body ">
+                            <h6 class="card-title" th:text="${matter.schedule}"></h6>
+                            
+                            <p class="card-text" th:text="'Cupo Máximo: '+${matter.quota}"></p>
+                            
+
+                            <p th:if="${matter.teacher==null}">Profesor: Sin Asignar</p>
+                            <p th:unless="${matter.teacher==null}" th:each="teacher : ${matter.teacher}" th:text="'Profesor: ' + ${teacher.name}+ ' '+ ${teacher.last_name}"></p>
+                            <p th:if="${matter.quota}==${#arrays.length(matter.students)}" class="bg-danger">Cupo lleno</p>
+                            <p th:unless="${matter.quota}==${#arrays.length(matter.students)}" class="card-text" th:text="'Inscriptos: '+${#arrays.length(matter.students)}"></p>
+                            <div th:with="inscripto = 0">
+                                <div th:each="inscripcion : ${inscripciones}">        
+                                    <p sec:authorize="hasRole('ROLE_STUDENT')" th:if="${matter.id_matter==inscripcion}" class="bg-success text-white">Ya estas inscripto</p>
+                                </div>
+                                <a sec:authorize="hasRole('ROLE_STUDENT')" th:if="inscripto != 1" th:href="@{description/}+${matter.id_matter}" class="btn btn-success" th:text="Inscribirme"></a>
+                            </div>
+                            <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{delete/}+${matter.id_matter}" class="btn btn-danger"th:text="Eliminar"></a>
+                            <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{edit/}+${matter.id_matter}" class="btn btn-warning"th:text="Editar"></a>
+                            <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{teacher/}+${matter.id_matter}"class="btn btn-primary"th:text="Profesor"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <nav th:replace='layouts/layout_pag :: pagination'></nav>
+        </div>
+        <br>
+        <br>
+        <br>
+        <footer th:replace="layouts/layout_base :: footer"></footer>
+                
+        
+    </body>
+    
+</html>

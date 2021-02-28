@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+
+<html>
+    <head xmlns:th="http://www.thymeleaf.org" th:replace="layouts/layout_base::head">
+        <title>index</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+     
+    <body>
+        <div class="container">
+            <ul th:replace="layouts/layout_base :: nav"></ul>
+          
+            
+            <div class="row m-0 justify-content-center aling-items-center vh-100">
+                <div class=" text-center col-sm-12 col-md-10 col-lg-8 col-xl-6 m-5">
+                    <div>
+                        <h1>Universidad Java</h1> 
+                    </div>
+                    
+                    
+                    <img th:src="@{img/home.jpg}" class="w-100 h-40" />
+
+                    
+                    
+                    <br>
+                    <a th:href="@{/inscriptions}" class="btn btn-primary justify-content-end">Ingresar</a>
+                </div>
+            </div>
+        </div>
+        
+            
+            
+        
+
+    </body>
+</html>

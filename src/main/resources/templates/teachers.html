@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+
+<html>
+    <head xmlns:th="http://www.thymeleaf.org" th:replace="layouts/layout_base::head">
+        <title>teachers</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div class="container">
+            <ul th:replace="layouts/layout_base :: nav"></ul>
+            <br>
+            <a sec:authorize="hasRole('ROLE_ADMIN')"th:href="@{formCreateTeacher}" class="btn btn-primary justify-content-end">Crear Profesor nuevo</a>
+            <br>
+            <br>
+            <div class="container justify-content-center" style="padding-left: 60px;">
+                <div class="row justify-content-center">
+                    <div class="card text-center col-sm-12 col-md-4 col-lg-3 col-xl-3"style="width: 310px; margin: 20px; height: 240px" th:each="teacher : ${teachers}">
+              
+
+                        <form th:action="@{add/}+${teacher.id_teacher}" th:object="${teacher}" method="post">
+                            <div class="card-header" th:text="${teacher.last_name}"></div>
+                            <div class="card-body">
+                                <h6 class="card-title" th:text="${teacher.name}"></h6>
+                                <h6 class="card-text" th:text="${teacher.dni_teacher}"></h6>
+                                
+                                <div th:if="${teacher.active==true}"> 
+                                    <br>
+                                    <h6 class="card-text">El profesor ya esta asignado a una materia</h6>
+                                </div>
+                                <br>
+                                
+                                <button th:if="${teacher.active==false}"type="submit" name="asignar" class="btn btn-primary">Asignar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>   
+        </div>
+    </body>
+</html>

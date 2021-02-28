@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+    
+    <head th:replace="layouts/layout_base::head">
+        <title>CreateTeacher </title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <ul th:replace="layouts/layout_base :: nav"></ul>
+        <div class="container">
+            <div class="card bg-light justify-content-center">
+                <form th:action="@{createTeacher}" th:object="${teacher}" method="post">
+                    <div class="form-group row">
+                        <input type="hidden" class="form-control" name="id_teacher" th:field="*{id_teacher}"/>
+                        <div class="col-md-6">
+                            <label class="form-label">Nombre</label>
+                            <input type="text" class="form-control form-control-sm col-md-6" name="name" th:field="*{name}"id="name"/>
+                            <small class="form-text text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></small>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-6">
+                            <label class="form-label">Apellido</label>
+                            <input type="text" class="form-control form-control-sm col-md-6" name="last_name" th:field="*{last_name}" id="last_name"/>
+                            <small class="form-text text-danger" th:if="${#fields.hasErrors('last_name')}" th:errors="*{last_name}"></small>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-6">
+                            <label class="form-label">DNI</label>
+                            <input type="text" class="form-control form-control-sm col-md-6" placeholder="Número de documento" name="dni_teacher" th:field="*{dni_teacher}" id="dni_teacher"/>
+                            
+                        </div>
+                    </div>
+
+
+                    <div class="col-12">
+                        <button type="submit" name="createTeacher" class="btn btn-primary">Crear</button>
+                    </div>
+                </form>
+            </div>
+         </div>
+                
+    </body>
+</html>

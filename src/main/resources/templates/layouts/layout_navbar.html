@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+
+<html>
+    <head xmlns:th="http://www.thymeleaf.org" th:replace="layouts/layout_base::head">
+                 
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        
+            <nav th:fragment="menu"></nav>
+            <ul class="nav nav-pills">
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" th:href="redirect:@{/}">Inicio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="redirect:/@{inscriptions}">Inscripciones</a>
+                </li>
+                <li class="nav-item">
+                    <form method="POST" th:action="@{/logout}">
+                        <a class="nav-link" href="#" onclick="this.parentNode.submit();">Logout</a>
+                    </form>
+
+                </li>
+
+             </ul>
+
+                
+    </body>
+</html>

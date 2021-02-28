@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+    
+    <head th:replace="layouts/layout_base::head">
+        <title>Edit</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <ul th:replace="layouts/layout_base :: nav"></ul>
+        <div class="container">
+            <div class="card bg-light justify-content-center">
+                <form th:action="@{modificar/}+${matter.id_matter}" th:object="${matter}" method="post">
+                    <div class="form-group row">
+                        <input type="hidden" class="form-control" name="id_matter" th:field="*{id_matter}"/>
+                        <div class="col-md-6">
+                            <label class="form-label">Nombre</label>
+                            <input type="text" class="form-control" name="name" th:field="*{name}"id="name"/>
+                            <small class="form-text text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></small>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-6">
+                            <label class="form-label">horario</label>
+                            <input type="datetime" class="form-control" name="schedule" placeholder="hh:mm:ss" th:field="*{schedule}"/>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-6">
+                            <label class="form-label">Descripción</label>
+                            <input type="text" class="form-control" name="description" th:field="*{description}" id="description"/>
+                            <small class="form-text text-danger" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></small>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-6">
+                            <label class="form-label">Cupo</label>
+                            <input type="number" class="form-control" name="quota" placeholder="Cupo máximo de estudiantes" th:field="*{quota}"/>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-6">
+                            <label class="form-label">Profesor</label>
+                            <input type="text" class="form-control" name="teacher" placeholder="Profesor a cargo" th:field="*{teacher}"/>
+                        </div>
+                    </div>
+
+                    <div class="col-6">
+                        <button type="submit" name="modificar" class="btn btn-primary">Confirmar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>
